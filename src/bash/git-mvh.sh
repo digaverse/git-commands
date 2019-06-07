@@ -88,6 +88,10 @@ git_mvh_file_exists() {
 # GIT-RMH
 ################################################################################
 git_mvh_exec() {
+  if [[ $1 == "help" ]]; then
+    git_mvh_helpmenu;
+    git_mvh_exit 0;
+  fi
   # from path
   local from=$1
   local from_is_dir=0

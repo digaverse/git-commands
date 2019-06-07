@@ -131,7 +131,7 @@ git_mvh_exec() {
     git_mvh_loginfo "tree-filter to execute against $GIT_MVH_REPO"
     git_mvh_loginfo -e "$GIT_MVH_FILTER"
   fi
-  [ $GIT_MVH_DRYRUN -eq 0 ] && git filter-branch -f --tree-filter "`echo -e $GIT_MVH_FILTER`"
+  [ $GIT_MVH_DRYRUN -eq 0 ] && git filter-branch -f --tree-filter "`echo -e $GIT_MVH_FILTER`" && git_mvh_loginfo "run: git push -f to push these changes to your repo!"
 }
 ################################################################################
 # Parse arguments and flags

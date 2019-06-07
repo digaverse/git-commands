@@ -123,7 +123,7 @@ git_mvh_exec() {
       if [ ! -e \"$dir\" ]; then                      \n\
         mkdir -p ${GIT_MVH_VERBOSE} \"$dir\" && echo  \n\
       fi                                              \n\
-      mv $GIT_MVH_VERBOSE \"$from\" \"$to\"           \n\
+      mv \"$from\" \"$to\"           \n\
     fi                                                \n\
   "
   if [[ $GIT_MVH_DRYRUN -eq 1 || $GIT_MVH_VERBOSE -eq 1 ]]; then

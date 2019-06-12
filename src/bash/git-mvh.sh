@@ -14,6 +14,31 @@ GIT_MVH_WD="$(pwd)"
 GIT_MVH_NAME="git-mvh"
 GIT_MVH_REPO=$(basename `git rev-parse --show-toplevel`)
 GIT_MVH_FILTER=""
+
+################################################################################
+# CORE
+################################################################################
+# exit with code
+git_mvh_exit() {
+  exit $1
+}
+# is path  drectory
+git_mvh_is_dir() {
+  if [[ -d $1 ]] && [[ -n $1 ]] ; then
+    return 0
+  else
+    return 1
+  fi
+}
+# file exists
+git_mvh_file_exists() {
+  if [[ -f $1 ]] && [[ -n $1 ]] ; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 ################################################################################
 # LOG
 ################################################################################
@@ -61,29 +86,7 @@ git_mvh_helpmenu() {
   git_mvh_logline "   -v, --verbose               log verbose"
   git_mvh_logline
 }
-################################################################################
-# CORE
-################################################################################
-# exit with code
-git_mvh_exit() {
-  exit $1
-}
-# is path  drectory
-git_mvh_is_dir() {
-  if [[ -d $1 ]] && [[ -n $1 ]] ; then
-    return 0
-  else
-    return 1
-  fi
-}
-# file exists
-git_mvh_file_exists() {
-  if [[ -f $1 ]] && [[ -n $1 ]] ; then
-    return 0
-  else
-    return 1
-  fi
-}
+
 ################################################################################
 # GIT-RMH
 ################################################################################

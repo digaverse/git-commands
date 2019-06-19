@@ -14,7 +14,7 @@ GIT_MVH_WD="$(pwd)"
 GIT_MVH_NAME="git-mvh"
 GIT_MVH_REPO=$(basename `git rev-parse --show-toplevel`)
 GIT_MVH_FILTER=""
-
+GIT_MVH_SUPPORTED_ENV=("bash", "sh", "git")
 ################################################################################
 # CORE
 ################################################################################
@@ -64,8 +64,8 @@ shell="${shell##-}"
 shell="${shell%% *}"
 shell="$(basename "${shell:-$SHELL}")"
 
-if [[ $shell != "bash" ]]; then
-  # setup shell
+# check shell
+if [[ ! " ${GIT_MVH_SUPPORTED_ENV[@]} " =~ "${shell}" ]]; then
   git_mvh_logerr "Not supported ${shell}, only bash,sh are supported"
   git_mvh_exit 1
 fi

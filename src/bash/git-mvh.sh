@@ -88,7 +88,7 @@ git_mvh_helpmenu() {
 }
 
 ################################################################################
-# GIT-RMH
+# GIT-MVH
 ################################################################################
 git_mvh_exec() {
   if [[ $1 == "help" ]]; then
@@ -108,10 +108,10 @@ git_mvh_exec() {
     to_is_dir=1
   fi
   # is from dir ?
-  git_mvh_logdebug "repository: ${GIT_MVH_REPO} "
-  git_mvh_logdebug "from: ${from} "
+  git_mvh_loginfo "repository: ${GIT_MVH_REPO} "
+  git_mvh_loginfo "from: ${from} "
   git_mvh_logdebug "from_is_dir: ${from_is_dir} "
-  git_mvh_logdebug "to: ${to} "
+  git_mvh_loginfo "to: ${to} "
   git_mvh_logdebug "to_is_dir: ${to_is_dir} "
 
   if [[ $from_is_dir -eq 0 ]] && ! git_mvh_file_exists $from; then
@@ -122,7 +122,7 @@ git_mvh_exec() {
   git_mvh_loginfo "git renaming (${from}) to (${to})"
   # go ahead
   dir=`echo $to | grep -q '/$' && echo $to || dirname $to`
-  [ ! -e "$from"   ] && usage "error: $src does not exist"
+  [ ! -e "$from"   ] && usage "error: $from does not exist"
 
   GIT_MVH_FILTER="$GIT_MVH_FILTER                     \n\
     if [ -e \"$from\" ]; then                         \n\
@@ -130,7 +130,7 @@ git_mvh_exec() {
       if [ ! -e \"$dir\" ]; then                      \n\
         mkdir -p ${GIT_MVH_VERBOSE} \"$dir\" && echo  \n\
       fi                                              \n\
-      mv \"$from\" \"$to\"           \n\
+      mv \"$from\" \"$to\"                            \n\
     fi                                                \n\
   "
   if [[ $GIT_MVH_DRYRUN -eq 1 || $GIT_MVH_VERBOSE -eq 1 ]]; then
